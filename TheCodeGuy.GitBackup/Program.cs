@@ -8,8 +8,8 @@ namespace TheCodeGuy.GitBackup
     {
         static void Main(string[] args)
         {
-            var sourceDirectory = args.Length == 2 ? args[0] : @"C:\Users\paul\Git";
-            var destinationDirectory = args.Length == 2 ? args[1] : @"C:\Users\paul\OneDrive\Git Backup";
+            var sourceDirectory = args.Length == 2 ? args[0] : Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Git";
+            var destinationDirectory = args.Length == 2 ? args[1] : Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\OneDrive\Git Backup";
             var directories = Directory.GetDirectories(sourceDirectory);
             foreach (var directory in directories)
             {
