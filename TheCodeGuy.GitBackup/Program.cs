@@ -13,19 +13,20 @@ namespace TheCodeGuy.GitBackup
             var directories = Directory.GetDirectories(sourceDirectory);
             foreach (var directory in directories)
             {
+                Console.Write("Bundling " + new DirectoryInfo(directory).Name + "...");
+
                 var startInfo = new ProcessStartInfo();
                 startInfo.WorkingDirectory = directory;
                 startInfo.FileName = @"git";
                 startInfo.Arguments = "bundle create \"" + destinationDirectory + "\\" + new DirectoryInfo(directory).Name + "\" --all";
                 startInfo.CreateNoWindow = true;
-                startInfo.UseShellExecute = false;
-                startInfo.RedirectStandardOutput = true;
-                startInfo.RedirectStandardError = true;
 
                 Process proc = Process.Start(startInfo);
                 proc.OutputDataReceived += (s, e) => Console.WriteLine(e.Data);
                 proc.ErrorDataReceived += (s, e) => Console.WriteLine(e.Data);
                 proc.WaitForExit();
+
+                Console.WriteLine("Complete!");
             }
         }
     }
